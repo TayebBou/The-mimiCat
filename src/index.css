@@ -11,3 +11,20 @@ code {
   font-family: 'Open Sans', sans-serif, source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#root {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+}
+
+.p-progress-spinner {
+  top: 50%;
+  display: flex !important;
+  transform: translateY(-50%);
+  height: calc(100vh - 242px) !important;
+}
+  
+.p-progress-spinner-circle {
+  stroke: #2747b1 !important;
+}
