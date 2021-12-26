@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://the-mimicat-default-rtdb.europe-west1.firebasedatabase.app/";

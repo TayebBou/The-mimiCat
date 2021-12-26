@@ -1,0 +1,36 @@
+.div-center {
+    flex-direction: column;
+    align-items:center;
+    display: flex;
+    width: 22vh;
+    position: absolute; 
+    top: 9%;
+    height: 36vh;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+.strong {
+    color: #365165;
+    font-family: "Baloo 2";
+}
+.big-text {
+    font-size: 11vh;
+    margin-left: 3vh;
+}
+.small-text-up {
+    font-size: 6vh;
+    margin-left: -1vh;
+}
+.small-text-down {
+    font-size: 5.2vh;
+    position: relative;
+    bottom: 6vh;
+}
+.img{
+    width: 13vh;
+    height: 13vh;
+    bottom: 7vh;
+    position: relative;
+}

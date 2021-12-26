@@ -1,0 +1,38 @@
+.div {
+    position: relative;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    color: #365165;
+    font-family: "Baloo 2";
+    text-align: center;
+}
+
+.middle-vertical {
+    position: relative;
+    top: 50vh;
+}
+
+.h2 {
+    font-weight: bolder;
+    font-size: 4vh;
+}
+
+.p {
+    margin: 4vh;
+    font-size: 2.5vh;
+}
+
+.div-buttons {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.left-button {
+    margin-right: 3vh !important;
+    margin-bottom: 3vh !important;
+}
+
+.right-button {
+    margin-bottom: 3vh !important;
+}

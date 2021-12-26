@@ -1,10 +1,30 @@
-# Getting Started with Create React App
+# The mimiCat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# LIVE HERE : """""""""""""""""""""""""" Link here
 
-## Available Scripts
+The mimiCat is a website which allows you to find the cutest cat thanks to visitors' comparisons and votes with React JS / CRA / Cypress / TypeScript / Prime React / CSS / Sass / Axios / Firebase / ESLint.
+
+All screen size are handled except for extra small screen size.
+I used the best react practices to develop the mimiCat app.
+For the deployement I built the project with the `yarn build` commande and I deployed with Firebase, here the documentation for hosting and deploying your app in Firebase : https://firebase.google.com/docs/hosting/quickstart.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! image here
+
+## How to run
+
+### Install Node.js plateform
+
+( Choose the LTS version recommanded for most users )
 
 In the project directory, you can run:
+
+### `npm install --global yarn`
+
+to install the yarn package it's a better alternative of npm.
+
+### `yarn install`
+
+To install all dependencies.
 
 ### `yarn start`
 
@@ -13,6 +33,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
+### You can start using the application with all its features :)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! images here
+
 
 ### `yarn test`
 
