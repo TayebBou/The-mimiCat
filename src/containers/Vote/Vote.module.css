@@ -23,15 +23,15 @@
     border-radius: 30%;
 	background-clip: content-box, border-box;
     cursor: pointer;
-	box-shadow: 0 0 40px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 4.5vh 5px rgba(0, 0, 0, 0.5);
 }
 
 .left-picture-frame {
-    border: 11px solid #ffffff4d;
+    border: 1.5vh solid #ffffff4d;
 }
 
 .right-picture-frame {
-    border: 11px solid #78a4af33;
+    border: 1.5vh solid #78a4af33;
 }
 
 .left-picture-frame:hover {
@@ -44,4 +44,50 @@
     border-color: #21bd5fee;
  }
 
+.h2 {
+    font-size: 8vh;
+    width: 27.1vh;
+    margin-top: 2.5vh;
+}
 
+.middle-text {
+    font-family: "Baloo 2";
+    color: #365165;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+}
+
+.bottom-div {
+    width: 70vh;
+    cursor: pointer;
+    text-align: center;
+    height: 10vh;
+    border-radius: 2vh 2vh 0 0;
+    border-bottom: none !important;
+    border: 1.5vh solid #ecf0f1;
+    background-color: #f7f7f7;
+    bottom: 0%;
+}
+.bottom-div:hover {
+    border: 1.5vh solid #dee5e6;
+}
+.bottom-div:active {
+    border: 1.5vh solid #f3f48e;
+}
+
+.p {
+    font-size: 2.5vh;
+    padding-top: 0.3vh;
+    margin: 0;
+}
+
+.span {
+    font-size: 2vh;
+    bottom: 0.7vh;
+    display: block;
+    position: relative;
+    margin-top: 0.5vh;
+}
