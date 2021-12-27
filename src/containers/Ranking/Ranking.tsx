@@ -10,16 +10,20 @@ import Logo from '../../components/Logo/Logo'
 import backImage from '../../assets/images/arrow.png'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { RouteComponentProps } from 'react-router'
+import meow from '../../assets/audio/meow.mp3'
+import firstMedal from '../../assets/images/medal-first.png'
+import secondMedal from '../../assets/images/medal-second.png'
+import thirdMedal from '../../assets/images/medal-third.png'
+import medal from '../../assets/images/medal.png'
 
 const Ranking = (props: RouteComponentProps) => {
   const [rankedArray, setRankedArray] = useState<IRankedArray[]>([])
-  const [rankedArrayFetched, setRankedArrayFetched] = useState<IRankedArray[]>(
-    [],
-  )
+  const [rankedArrayFetched, setRankedArrayFetched] = useState<IRankedArray[]>([])
   const [images, setImages] = useState<IImage[]>([])
   const [loading, setLoading] = useState(true)
   const [basicFirst, setBasicFirst] = useState(0)
   const [basicRows, setBasicRows] = useState(10)
+  const audio = new Audio(meow);
 
   useEffect(() => {
     // Getting images with axios
@@ -88,6 +92,7 @@ const Ranking = (props: RouteComponentProps) => {
     return (
       <div key={i.id + "-div"}>
         <img
+          onClick={() => audio.play()}
           key={i.id}
           src={urlImage?.url}
           alt={`cat number ${j + 1}`}
@@ -138,7 +143,18 @@ const Ranking = (props: RouteComponentProps) => {
             <ProgressSpinner />
           </div>
         ) : (
-          catsRanked
+          <React.Fragment>
+            {basicFirst === 0 && (
+              <React.Fragment>
+                <img src={firstMedal} alt="first-medal" className={styles['first-medal']}/>
+                <img src={secondMedal} alt="second-medal" className={styles['second-medal']}/>
+                <img src={thirdMedal} alt="third-medal" className={styles['third-medal']}/>
+                <img src={medal} alt="medal" className={styles['medal-one']}/>
+                <img src={medal} alt="medal" className={styles['medal-two']}/>
+              </React.Fragment>
+            )}
+            {catsRanked}
+          </React.Fragment>
         )}
         <Paginator
           className={styles['p-paginator']}

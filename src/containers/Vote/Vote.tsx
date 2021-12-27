@@ -6,6 +6,7 @@ import axios from '../../axios-votes'
 import Logo from '../../components/Logo/Logo'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { RouteComponentProps } from 'react-router'
+import meow from '../../assets/audio/meow.mp3'
 
 const Vote = (props: RouteComponentProps) => {
   // Array of Images
@@ -13,6 +14,7 @@ const Vote = (props: RouteComponentProps) => {
   const [loading, setLoading] = useState(true)
   const [voted, setVoted] = useState(false)
   const [votesNbr, setVotesNbr] = useState(0)
+  const audio = new Audio(meow);
 
   useEffect(() => {
     // Getting images with axios
@@ -97,7 +99,7 @@ const Vote = (props: RouteComponentProps) => {
         )}
       </div>
       <div
-        onClick={() => props.history.push('/ranking')}
+        onClick={() => {audio.play(); props.history.push('/ranking')}}
         className={`${styles['middle-text']} ${styles['bottom-div']}`}
       >
         <p className={styles.p}>Cutest cats ranking</p>
