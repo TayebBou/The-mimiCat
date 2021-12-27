@@ -49,7 +49,7 @@ const Ranking = (props: RouteComponentProps) => {
         const VotesNbr = res.data.totalVoteNbr
         const catArrayRanked: { id: string; rank: number }[] = []
         // convert object to key's array
-        const keys = Object.keys(res.data).filter((a) => a !== 'totalVoteNbr')
+        const keys = Object.keys(res.data).filter((a) => a !== 'totalVoteNbr' && a !== 'images')
         keys.map(
           (i: string, j: number) =>
             (catArrayRanked[j] = {
