@@ -1,6 +1,6 @@
 # The mimiCat
 
-# LIVE HERE : """""""""""""""""""""""""" Link here
+# LIVE HERE : https://the-mimicat.web.app/
 
 The mimiCat is a website which allows you to find the cutest cat thanks to visitors' comparisons and votes with React JS / CRA / Cypress / TypeScript / Prime React / CSS / Sass / Axios / Firebase / ESLint.
 
@@ -8,7 +8,7 @@ All screen size are handled except for extra small screen size.
 I used the best react practices to develop the mimiCat app.
 For the deployement I built the project with the `yarn build` commande and I deployed with Firebase, here the documentation for hosting and deploying your app in Firebase : https://firebase.google.com/docs/hosting/quickstart.
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! image here
+![image](https://user-images.githubusercontent.com/52780772/147425620-6e032c85-3114-44aa-a7bb-b9219324a834.png)
 
 ## How to run
 
@@ -36,7 +36,7 @@ You will also see any lint errors in the console.
 
 ### You can start using the application with all its features :)
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! images here
+![image](https://user-images.githubusercontent.com/52780772/147425678-f821c5ad-645a-410e-9baa-d9c9f132e79a.png)
 
 
 ### `yarn test`
