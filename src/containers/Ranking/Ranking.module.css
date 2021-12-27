@@ -1,5 +1,6 @@
 .picture-frame {
   position: relative;
+  cursor: pointer;
   height: 36vh;
   width: 36vh;
   display: flex;
@@ -80,7 +81,7 @@
   position: relative;
   left: 1vh;
 }
-.div-back-other-pages{
+.div-back-other-pages {
   cursor: pointer;
   width: 13vh;
   height: 13vh;
@@ -175,4 +176,60 @@
   background-color: #fafaffb5;
   border: 1.5vh solid #49839033;
   margin-bottom: 6vh;
+}
+.first-medal {
+  display: flex;
+  position: absolute;
+  margin-right: auto;
+  width: 11vh;
+  z-index: 12;
+  height: 11vh;
+  top: 12.5vh;
+  left: 0;
+  margin-left: auto;
+  right: 0;
+}
+.second-medal {
+  display: flex;
+  position: absolute;
+  margin-right: auto;
+  width: 9vh;
+  z-index: 12;
+  height: 9vh;
+  top: 17.5vh;
+  left: 37.5vh;
+}
+.third-medal {
+  display: flex;
+  position: absolute;
+  width: 8vh;
+  z-index: 12;
+  height: 8vh;
+  top: 21vh;
+  margin-left: auto;
+  right: 40.5vh;
+}
+.medal-one {
+  display: flex;
+  position: absolute;
+  margin-right: auto;
+  width: 8vh;
+  z-index: 12;
+  height: 8vh;
+  top: 18vh;
+  left: 0;
+  margin-left: auto;
+  right: 30.5vh;
+}
+.medal-two {
+  display: flex;
+  position: absolute;
+  margin-right: auto;
+  width: 8vh;
+  z-index: 12;
+  height: 8vh;
+  top: 18vh;
+  left: 30.5vh;
+  margin-left: auto;
+  right: 0;
 }
