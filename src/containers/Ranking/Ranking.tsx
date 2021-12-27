@@ -1,6 +1,5 @@
-import axiosImages from '../../axios-images'
 import React, { useEffect, useState } from 'react'
-import axiosVotes from '../../axios-votes'
+import axios from '../../axios-votes'
 import styles from './Ranking.module.css'
 import { IImage } from '../../models/image.model'
 import { IRankedArray } from '../../models/rankedArray.model'
@@ -24,7 +23,7 @@ const Ranking = (props: RouteComponentProps) => {
 
   useEffect(() => {
     // Getting images with axios
-    axiosImages
+    axios
       .get('/cats.json')
       .then((res) => {
         setImages(res.data.images)
@@ -44,7 +43,7 @@ const Ranking = (props: RouteComponentProps) => {
 
   // create the ranked array and sort it in descending order
   const rankCats = () => {
-    axiosVotes
+    axios
       .get('/cats.json')
       .then((res) => {
         const VotesNbr = res.data.totalVoteNbr
@@ -154,4 +153,4 @@ const Ranking = (props: RouteComponentProps) => {
   )
 }
 
-export default withErrorHandler(Ranking, axiosVotes)
+export default withErrorHandler(Ranking, axios)
