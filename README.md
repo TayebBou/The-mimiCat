@@ -36,8 +36,7 @@ You will also see any lint errors in the console.
 
 ### You can start using the application with all its features :)
 
-![image](https://user-images.githubusercontent.com/52780772/147425678-f821c5ad-645a-410e-9baa-d9c9f132e79a.png)
-
+![image](https://user-images.githubusercontent.com/52780772/147436306-3daf60a2-3a27-4874-be66-b3083eccfb67.png)
 
 ### `yarn test`
 
