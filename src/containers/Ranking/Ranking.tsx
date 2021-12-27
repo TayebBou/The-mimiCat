@@ -15,6 +15,7 @@ import firstMedal from '../../assets/images/medal-first.png'
 import secondMedal from '../../assets/images/medal-second.png'
 import thirdMedal from '../../assets/images/medal-third.png'
 import medal from '../../assets/images/medal.png'
+import trophy from '../../assets/images/trophy.png'
 
 const Ranking = (props: RouteComponentProps) => {
   const [rankedArray, setRankedArray] = useState<IRankedArray[]>([])
@@ -151,6 +152,7 @@ const Ranking = (props: RouteComponentProps) => {
                 <img src={thirdMedal} alt="third-medal" className={styles['third-medal']}/>
                 <img src={medal} alt="medal" className={styles['medal-one']}/>
                 <img src={medal} alt="medal" className={styles['medal-two']}/>
+                <img src={trophy} alt="trophy" className={styles.trophy}/>
               </React.Fragment>
             )}
             {catsRanked}
