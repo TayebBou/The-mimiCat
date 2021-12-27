@@ -233,3 +233,15 @@
   margin-left: auto;
   right: 0;
 }
+.trophy {
+  display: flex;
+  position: absolute;
+  margin-right: auto;
+  width: 11vh;
+  z-index: 12;
+  height: 11vh;
+  top: 66.5vh;
+  left: 0;
+  margin-left: auto;
+  right: 0;
+}
