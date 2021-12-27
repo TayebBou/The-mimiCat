@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Vote.module.css'
-import axiosImages from '../../axios-images'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { IImage } from '../../models/image.model'
-import axiosVotes from '../../axios-votes'
+import axios from '../../axios-votes'
 import Logo from '../../components/Logo/Logo'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { RouteComponentProps } from 'react-router'
@@ -17,7 +16,7 @@ const Vote = (props: RouteComponentProps) => {
 
   useEffect(() => {
     // Getting images with axios
-    axiosImages
+    axios
       .get('/cats.json')
       .then((res) => {
         const shuffledImages: IImage[] = res.data.images.sort(
@@ -41,7 +40,7 @@ const Vote = (props: RouteComponentProps) => {
 
   // Getting votes number from firebase
   const getVotesNbr = () => {
-    axiosVotes
+    axios
       .get('/cats.json')
       .then((res) => {
         setVotesNbr(res.data.totalVoteNbr)
@@ -56,7 +55,7 @@ const Vote = (props: RouteComponentProps) => {
       [id]: { vote: { '.sv': { increment: 1 } } },
       totalVoteNbr: { '.sv': { increment: 1 } },
     }
-    axiosVotes
+    axios
       .patch(`/cats.json`, upsertData)
       .then((res) => {
         shuffleImages()
@@ -108,4 +107,4 @@ const Vote = (props: RouteComponentProps) => {
   )
 }
 
-export default withErrorHandler(Vote, axiosVotes)
+export default withErrorHandler(Vote, axios)
