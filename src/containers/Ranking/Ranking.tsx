@@ -115,7 +115,6 @@ const Ranking = (props: RouteComponentProps) => {
 
   return (
     <React.Fragment>
-      {/* <button onClick={() => props.history.push('/vote')}>RETURN</button> */}
       <div className={styles.div}>
         <div
           onClick={() => props.history.goBack()}
