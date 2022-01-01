@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { rankingActions } from '../../config/stateSlices/rankingSlice';
 import axios from '../../axios-votes'
 import styles from './Ranking.module.css'
-import { IImage } from '../../models/image.model'
-import { IRankedArray } from '../../models/rankedArray.model'
+import { IImage } from '../../shared/models/image.model'
+import { IRankedArray } from '../../shared/models/rankedArray.model'
 import { ProgressSpinner } from 'primereact/progressspinner'
 import { Paginator, PaginatorPageState } from 'primereact/paginator'
 import './Ranking.sass'
@@ -16,60 +18,44 @@ import secondMedal from '../../assets/images/medal-second.png'
 import thirdMedal from '../../assets/images/medal-third.png'
 import medal from '../../assets/images/medal.png'
 import trophy from '../../assets/images/trophy.png'
+import { IRootState } from '../../shared/models/rootState.model';
 
 const Ranking = (props: RouteComponentProps) => {
-  const [rankedArray, setRankedArray] = useState<IRankedArray[]>([])
-  const [rankedArrayFetched, setRankedArrayFetched] = useState<IRankedArray[]>([])
-  const [images, setImages] = useState<IImage[]>([])
-  const [loading, setLoading] = useState(true)
-  const [basicFirst, setBasicFirst] = useState(0)
-  const [basicRows, setBasicRows] = useState(10)
+  const dispatch = useDispatch();
+  const rankedArray:IRankedArray[] = useSelector((state:IRootState) => state.ranking.rankedArray)
+  const rankedArrayFetched:IRankedArray[] = useSelector((state:IRootState) => state.ranking.rankedArrayFetched)
+  const images:IImage[] = useSelector((state:IRootState) => state.ranking.images)
+  const loading:boolean = useSelector((state:IRootState) => state.ranking.loading)
+  const basicFirst:number = useSelector((state:IRootState) => state.ranking.basicFirst)
+  const basicRows:number = useSelector((state:IRootState) => state.ranking.basicRows)
   const audio = new Audio(meow);
+
+  // create the ranked array and sort it in descending order
+  const rankCats = useCallback(() => {
+    axios
+      .get('/cats.json')
+      .then((res) => {
+        dispatch(rankingActions.createRankedArray(res.data))
+      })
+      .catch((err) => {})
+  },[dispatch])
 
   useEffect(() => {
     // Getting images with axios
     axios
       .get('/cats.json')
       .then((res) => {
-        setImages(res.data.images)
-        setLoading(false)
+        dispatch(rankingActions.setImages(res.data.images))
+        dispatch(rankingActions.stopLoading())
       })
       .catch((err) => {})
     rankCats()
-  }, [])
+  }, [dispatch,rankCats])
 
   const onBasicPageChange = (event: PaginatorPageState) => {
-    setBasicFirst(event.first)
-    setBasicRows(event.rows)
-    setRankedArrayFetched(
-      [...rankedArray].slice(event.first, event.first + event.rows),
-    )
-  }
-
-  // create the ranked array and sort it in descending order
-  const rankCats = () => {
-    axios
-      .get('/cats.json')
-      .then((res) => {
-        const VotesNbr = res.data.totalVoteNbr
-        const catArrayRanked: { id: string; rank: number }[] = []
-        // convert object to key's array
-        const keys = Object.keys(res.data).filter((a) => a !== 'totalVoteNbr' && a !== 'images')
-        keys.map(
-          (i: string, j: number) =>
-            (catArrayRanked[j] = {
-              id: i,
-              // Calcul rank
-              rank: parseFloat(
-                ((res.data[i].vote / VotesNbr) * 100).toFixed(2),
-              ),
-            }),
-        )
-        const sortedArray = [...catArrayRanked].sort((a, b) => b.rank - a.rank)
-        setRankedArray(sortedArray)
-        setRankedArrayFetched([...sortedArray].slice(0, 10))
-      })
-      .catch((err) => {})
+    dispatch(rankingActions.setBasicFirst(event.first))
+    dispatch(rankingActions.setBasicRows(event.rows))
+    dispatch(rankingActions.setRankedArrayFetched([...rankedArray].slice(event.first, event.first + event.rows)))
   }
 
   const catsRanked = rankedArrayFetched.map((i: IRankedArray, j: number) => {
