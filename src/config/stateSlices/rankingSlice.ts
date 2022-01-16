@@ -4,8 +4,6 @@ import { IRankingStates } from "../../shared/models/rankingStates.model";
 const initialRankingState:IRankingStates = {
     rankedArray: [],
     rankedArrayFetched: [],
-    images: [],
-    loading: true,
     basicFirst: 0,
     basicRows: 10
 }
@@ -35,12 +33,6 @@ const rankingSlice = createSlice({
         },
         setRankedArrayFetched(state:IRankingStates,action) {
             state.rankedArrayFetched = action.payload;
-        },
-        setImages(state:IRankingStates,action) {
-            state.images = action.payload;
-        },
-        stopLoading(state:IRankingStates) {
-            state.loading = false;
         },
         setBasicFirst(state:IRankingStates,action) {
             state.basicFirst = action.payload;

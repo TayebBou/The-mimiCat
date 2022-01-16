@@ -10,12 +10,13 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { RouteComponentProps } from 'react-router'
 import meow from '../../assets/audio/meow.mp3'
 import { IRootState } from '../../shared/models/rootState.model';
+import { getImages } from '../../config/stateSlices/globalSlice';
 
 const Vote = (props: RouteComponentProps) => {
   const dispatch = useDispatch();
   // Array of Images
-  const images:IImage[] = useSelector((state:IRootState) => state.vote.images)
-  const loading:boolean = useSelector((state:IRootState) => state.vote.loading)
+  const images:IImage[] = useSelector((state:IRootState) => state.global.images)
+  const loading:boolean = useSelector((state:IRootState) => state.global.loading)
   const voted:boolean = useSelector((state:IRootState) => state.vote.voted)
   const votesNbr:number = useSelector((state:IRootState) => state.vote.votesNbr)
   const catIndex:number[] = useSelector((state:IRootState) => state.vote.catIndex)
@@ -30,17 +31,14 @@ const Vote = (props: RouteComponentProps) => {
       })
       .catch((err) => {})
   },[dispatch])
-
   useEffect(() => {
     // Getting images with axios
-    axios
-      .get('/cats.json')
-      .then((res) => {
-        dispatch(voteActions.setImages(res.data.images))
-        dispatch(voteActions.shuffleImages())
-        dispatch(voteActions.stopLoading())
-      })
-      .catch((err) => {});
+      if(images.length === 0) {
+        dispatch(getImages());
+      }
+    }, [images.length, dispatch])
+
+  useEffect(() => {
       getVotesNbr();
   }, [dispatch, getVotesNbr])
 

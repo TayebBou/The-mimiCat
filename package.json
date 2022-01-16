@@ -1,7 +1,7 @@
 {
   "name": "the-mimicat",
   "author": "Tayeb BOUSFIHA",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "The mimiCat is a website which allows you to find the cutest cat thanks to visitors' comparisons and votes with React JS / CRA / Cypress / TypeScript / Prime React / CSS / Sass / Axios / Firebase / ESLint.",
   "private": true,
   "dependencies": {
