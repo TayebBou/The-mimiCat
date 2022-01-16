@@ -19,13 +19,14 @@ import thirdMedal from '../../assets/images/medal-third.png'
 import medal from '../../assets/images/medal.png'
 import trophy from '../../assets/images/trophy.png'
 import { IRootState } from '../../shared/models/rootState.model';
+import { getImages } from '../../config/stateSlices/globalSlice';
 
 const Ranking = (props: RouteComponentProps) => {
   const dispatch = useDispatch();
   const rankedArray:IRankedArray[] = useSelector((state:IRootState) => state.ranking.rankedArray)
   const rankedArrayFetched:IRankedArray[] = useSelector((state:IRootState) => state.ranking.rankedArrayFetched)
-  const images:IImage[] = useSelector((state:IRootState) => state.ranking.images)
-  const loading:boolean = useSelector((state:IRootState) => state.ranking.loading)
+  const images:IImage[] = useSelector((state:IRootState) => state.global.images)
+  const loading:boolean = useSelector((state:IRootState) => state.global.loading)
   const basicFirst:number = useSelector((state:IRootState) => state.ranking.basicFirst)
   const basicRows:number = useSelector((state:IRootState) => state.ranking.basicRows)
   const audio = new Audio(meow);
@@ -42,13 +43,12 @@ const Ranking = (props: RouteComponentProps) => {
 
   useEffect(() => {
     // Getting images with axios
-    axios
-      .get('/cats.json')
-      .then((res) => {
-        dispatch(rankingActions.setImages(res.data.images))
-        dispatch(rankingActions.stopLoading())
-      })
-      .catch((err) => {})
+      if(images.length === 0) {
+        dispatch(getImages());
+      }
+    }, [images.length, dispatch])
+
+  useEffect(() => {
     rankCats()
   }, [dispatch,rankCats])
 

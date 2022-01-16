@@ -3,23 +3,15 @@ import { IVoteStates } from "../../shared/models/voteStates.model";
 import { randomIntFromInterval } from '../../shared/util/number-utils'
 
 const initialVoteState:IVoteStates = {
-    images: [],
-    loading: true,
     voted: false,
     votesNbr: 0,
-    catIndex: []
+    catIndex: [randomIntFromInterval(0,99),randomIntFromInterval(0,99)]
 }
 
 const voteSlice = createSlice({
     name: 'vote',
     initialState: initialVoteState,
     reducers: {
-        setImages(state:IVoteStates, action) {
-            state.images = action.payload;
-        },
-        stopLoading(state:IVoteStates) {
-            state.loading = false;
-        },
         setVoted(state:IVoteStates,action) {
             state.voted = action.payload
         },
