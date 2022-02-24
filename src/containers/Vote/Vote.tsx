@@ -1,58 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import styles from './Vote.module.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { voteActions } from '../../config/stateSlices/voteSlice';
 import { ProgressSpinner } from 'primereact/progressspinner'
-import { IImage } from '../../models/image.model'
+import { IImage } from '../../shared/models/image.model'
 import axios from '../../axios-votes'
 import Logo from '../../components/Logo/Logo'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 import { RouteComponentProps } from 'react-router'
 import meow from '../../assets/audio/meow.mp3'
+import { IRootState } from '../../shared/models/rootState.model';
+import { getImages } from '../../config/stateSlices/globalSlice';
 
 const Vote = (props: RouteComponentProps) => {
+  const dispatch = useDispatch();
   // Array of Images
-  const [images, setImages] = useState<IImage[]>([])
-  const [loading, setLoading] = useState(true)
-  const [voted, setVoted] = useState(false)
-  const [votesNbr, setVotesNbr] = useState(0)
+  const images:IImage[] = useSelector((state:IRootState) => state.global.images)
+  const loading:boolean = useSelector((state:IRootState) => state.global.loading)
+  const voted:boolean = useSelector((state:IRootState) => state.vote.voted)
+  const votesNbr:number = useSelector((state:IRootState) => state.vote.votesNbr)
+  const catIndex:number[] = useSelector((state:IRootState) => state.vote.catIndex)
   const audio = new Audio(meow);
 
-  useEffect(() => {
-    // Getting images with axios
-    axios
-      .get('/cats.json')
-      .then((res) => {
-        const shuffledImages: IImage[] = res.data.images.sort(
-          (a: {}, b: {}) => 0.5 - Math.random(),
-        )
-        setImages(shuffledImages)
-        setLoading(false)
-      })
-      .catch((err) => {});
-      getVotesNbr();
-  }, [])
-
-  // Shuffle the state of images array
-  const shuffleImages = () => {
-    const shuffledArray = [...images].sort(
-      (a: {}, b: {}) => 0.5 - Math.random(),
-    )
-    setImages(shuffledArray)
-    setVoted(false)
-  }
-
   // Getting votes number from firebase
-  const getVotesNbr = () => {
+  const getVotesNbr = useCallback(() => {
     axios
       .get('/cats.json')
       .then((res) => {
-        setVotesNbr(res.data.totalVoteNbr)
+        dispatch(voteActions.setVotesNbr(res.data.totalVoteNbr))
       })
       .catch((err) => {})
-  }
+  },[dispatch])
+  useEffect(() => {
+    // Getting images with axios
+      if(images.length === 0) {
+        dispatch(getImages());
+      }
+    }, [images.length, dispatch])
+
+  useEffect(() => {
+      getVotesNbr();
+  }, [dispatch, getVotesNbr])
 
   // Vote method
   const vote = (id: string) => {
-    setVoted(true)
+    dispatch(voteActions.setVoted(true))
     const upsertData = {
       [id]: { vote: { '.sv': { increment: 1 } } },
       totalVoteNbr: { '.sv': { increment: 1 } },
@@ -60,11 +52,12 @@ const Vote = (props: RouteComponentProps) => {
     axios
       .patch(`/cats.json`, upsertData)
       .then((res) => {
-        shuffleImages()
+        dispatch(voteActions.shuffleImages())
         getVotesNbr()
+        dispatch(voteActions.setVoted(false))
       })
       .catch((err) => {
-        setVoted(false)
+        dispatch(voteActions.setVoted(false))
       });
   }
 
@@ -78,8 +71,8 @@ const Vote = (props: RouteComponentProps) => {
         ) : (
           <img
             style={voted ? { pointerEvents: 'none' } : {}}
-            onClick={() => vote(images[0].id)}
-            src={images[0].url}
+            onClick={() => vote(images[catIndex[0]].id)}
+            src={images[catIndex[0]].url}
             alt="left cat"
             className={`${styles['picture-frame']} ${styles['left-picture-frame']}`}
           />
@@ -91,8 +84,8 @@ const Vote = (props: RouteComponentProps) => {
         ) : (
           <img
             style={voted ? { pointerEvents: 'none' } : {}}
-            onClick={() => vote(images[1].id)}
-            src={images[1].url}
+            onClick={() => vote(images[catIndex[1]].id)}
+            src={images[catIndex[1]].url}
             alt="right cat"
             className={`${styles['picture-frame']} ${styles['right-picture-frame']}`}
           />

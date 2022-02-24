@@ -11,20 +11,21 @@ const withErrorHandler = (WrappedComponent : (props: RouteComponentProps) => JSX
             setError(null);
         }
 
+        const reqInterceptor = axios.interceptors.request.use((req : AxiosRequestConfig<any>) => {
+            setError(null);
+            return req;
+        });
+        const resInterceptor = axios.interceptors.response.use(undefined, (error : any) => {
+            setError(error.message);
+            return Promise.reject(error);
+        });
+
         useEffect(() => {
-            const reqInterceptor = axios.interceptors.request.use((req : AxiosRequestConfig<any>) => {
-                setError(null);
-                return req;
-            });
-            const resInterceptor = axios.interceptors.response.use(undefined, (error : any) => {
-                setError(error.message);
-                return Promise.reject(error);
-            });
             return () => {
                 axios.interceptors.request.eject(reqInterceptor);
                 axios.interceptors.response.eject(resInterceptor);
-            }
-        }, [])
+            };
+        }, [reqInterceptor, resInterceptor])
 
         return (
             <React.Fragment>
